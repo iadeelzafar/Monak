@@ -12,4 +12,5 @@ A news reading android app built using <a href="https://github.com/realm/realm-j
 
 <a href="https://github.com/JakeWharton/butterknife">Butterknife</a> binds Android views and callbacks to fields and methods.
 * ConnectionBuddy:
+
 <a href="https://github.com/zplesac/android_connectionbuddy">ConnectionBuddy</a> is a library for handling connection change events.
