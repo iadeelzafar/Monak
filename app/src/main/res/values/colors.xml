@@ -15,8 +15,7 @@
     <color name="gray_dark">#616161</color>
     <color name="gray_light">#9e9e9e</color>
     <color name="brown">#5d4037</color>
-  <color name="newsBackground">#004D40</color>
-
+    <color name="newsBackground">#004D40</color>
     <color name="indicator_1">#55B3C2</color>
     <color name="indicator_2">#64A4A4</color>
     <color name="indicator_3">#66D7B9</color>

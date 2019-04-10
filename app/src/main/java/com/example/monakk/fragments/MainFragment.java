@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class MainFragment extends Fragment {
 
   private static final String ARG_PARAM1 = "param1";
@@ -46,7 +45,6 @@ public class MainFragment extends Fragment {
 
   public MainFragment() {
   }
-
 
   public static MainFragment newInstance(String param1, String param2) {
     MainFragment fragment = new MainFragment();

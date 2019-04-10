@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -24,18 +23,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.google.android.gms.ads.MobileAds;
-import com.mikepenz.aboutlibraries.Libs;
-import com.mikepenz.aboutlibraries.LibsBuilder;
-import com.mikepenz.aboutlibraries.ui.LibsSupportFragment;
 import com.example.monakk.R;
 import com.example.monakk.fragments.BlankFragment;
 import com.example.monakk.fragments.MainFragment;
 import com.example.monakk.model.Niche;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.zplesac.connectionbuddy.ConnectionBuddy;
 import com.zplesac.connectionbuddy.cache.ConnectionBuddyCache;
 import com.zplesac.connectionbuddy.interfaces.ConnectivityChangeListener;
@@ -43,7 +38,6 @@ import com.zplesac.connectionbuddy.models.ConnectivityEvent;
 import com.zplesac.connectionbuddy.models.ConnectivityState;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmQuery;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
@@ -58,13 +52,11 @@ public class MainActivity extends AppCompatActivity
   Toolbar toolbar;
 
   DrawerLayout mDrawer;
-  private Realm mRealm;
   ActionBarDrawerToggle mToggle;
-
-  private final Handler mHandler = new Handler();
   android.support.v4.app.FragmentTransaction fragmentTransaction;
   ProgressDialog progressDialog;
   MainFragment mainFragment = new MainFragment();
+  private Realm mRealm;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +69,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     ButterKnife.bind(this);
-    MobileAds.initialize(this, "ca-app-pub-4083824684818051~6248546920");
 
     ConnectionBuddy.getInstance().registerForConnectivityEvents(this, this);
     Realm.init(getApplicationContext());
@@ -97,7 +88,7 @@ public class MainActivity extends AppCompatActivity
     mToggle.syncState();
     mNavigationView.setNavigationItemSelectedListener(this);
 
-    if(!isOnline()){
+    if (!isOnline()) {
       Snackbar snackbar = Snackbar
           .make(coordinatorLayout, "No Internet !!", Snackbar.LENGTH_INDEFINITE)
           .setAction("Settings", new View.OnClickListener() {
@@ -110,7 +101,6 @@ public class MainActivity extends AppCompatActivity
       snackbar.show();
 
       progressDialog.dismiss();
-
     }
 
     getFromFirebase();
@@ -127,42 +117,33 @@ public class MainActivity extends AppCompatActivity
     progressDialog.setCancelable(false);
     progressDialog.show();
   }
-  private void checkProgressState(){
+
+  private void checkProgressState() {
     if (mRealm.where(Niche.class).findAll().size() > 0) {
 
       progressDialog.dismiss();
     }
   }
 
-
-
-
-
-  private void setupDrawer(){
+  private void setupDrawer() {
     mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-     mToggle = new ActionBarDrawerToggle(
+    mToggle = new ActionBarDrawerToggle(
         this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     mDrawer.addDrawerListener(mToggle);
-
   }
-  private void setRealm(){
-    RealmConfiguration realmConfiguration = new RealmConfiguration.Builder().name(Realm.DEFAULT_REALM_NAME)
-        .schemaVersion(0)
-        .deleteRealmIfMigrationNeeded()
-        .build();
+
+  private void setRealm() {
+    RealmConfiguration realmConfiguration =
+        new RealmConfiguration.Builder().name(Realm.DEFAULT_REALM_NAME)
+            .schemaVersion(0)
+            .deleteRealmIfMigrationNeeded()
+            .build();
     mRealm = Realm.getInstance(realmConfiguration);
-  }
-  public boolean checkIfExists(String id) {
-
-    RealmQuery<Niche> query = mRealm.where(Niche.class)
-        .equalTo("topic", id);
-
-    return query.count() != 0;
   }
 
   public void getFromFirebase() {
 
-    Firebase myFirebaseRef = new Firebase("https://knowfeed.firebaseio.com/");
+    Firebase myFirebaseRef = new Firebase("https://monak-8c54b.firebaseio.com/");
 
     myFirebaseRef.addValueEventListener(new ValueEventListener() {
       @Override
@@ -221,19 +202,15 @@ public class MainActivity extends AppCompatActivity
   public boolean onNavigationItemSelected(MenuItem item) {
 
     int id = item.getItemId();
-
     if (id == R.id.nav_camera) {
-
       showHomeFragment();
     }
-
     mDrawer.closeDrawer(GravityCompat.START);
     return true;
   }
 
   @Override
   public void onFragmentInteraction(Uri uri) {
-
   }
 
   public void showFragment(Fragment fragmentToSet) {
@@ -264,10 +241,7 @@ public class MainActivity extends AppCompatActivity
   @Override
   public void onConnectionChange(ConnectivityEvent event) {
     if (event.getState() == ConnectivityState.CONNECTED) {
-
-
     } else {
-
       final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id
           .cordinatorlayout);
       Snackbar snackbar = Snackbar
@@ -295,8 +269,7 @@ public class MainActivity extends AppCompatActivity
     ConnectionBuddy.getInstance().registerForConnectivityEvents(this, this);
   }
 
-  @Override
-  protected void onDestroy() {
+  @Override protected void onDestroy() {
     super.onDestroy();
     mRealm.close();
   }

@@ -3,17 +3,12 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello Blank Fragment</string>
     <string name="title_activity_web">Full Article</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_news_tabbed">NewsTabbedActivity</string>
     <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="add_widget">Add Widget</string>
     <string name="home">Home</string>
-    <string name="rate">Rate</string>
     <string name="app_title">Monak</string>
     <string name="app_developer">By Adeel Zafar</string>
 </resources>

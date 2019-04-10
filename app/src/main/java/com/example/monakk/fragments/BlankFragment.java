@@ -22,17 +22,16 @@ import com.einmalfel.earl.EarlParser;
 import com.einmalfel.earl.Enclosure;
 import com.einmalfel.earl.Feed;
 import com.einmalfel.earl.Item;
-import com.prof.rssparser.Article;
-import com.prof.rssparser.Parser;
 import com.example.monakk.R;
 import com.example.monakk.Util.CustomItemClickListener;
 import com.example.monakk.Util.RVAdapter;
+import com.prof.rssparser.Article;
+import com.prof.rssparser.Parser;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 
 public class BlankFragment extends Fragment {
 
@@ -50,7 +49,6 @@ public class BlankFragment extends Fragment {
   public BlankFragment() {
 
   }
-
 
   public static BlankFragment newInstance(String param1) {
     BlankFragment fragment = new BlankFragment();
@@ -195,7 +193,6 @@ public class BlankFragment extends Fragment {
     super.onDestroy();
   }
 
-
   public interface OnFragmentInteractionListener {
     void onFragmentInteraction(Uri uri);
   }
@@ -209,7 +206,7 @@ public class BlankFragment extends Fragment {
 
         mItems.addAll(feed.getItems());
       } catch (Exception e) {
-        Log.v("Error Parsing Data", e + "");
+        Log.v("Cannot Parse Data", e + "");
       }
       return null;
     }
@@ -218,7 +215,7 @@ public class BlankFragment extends Fragment {
     protected void onPostExecute(Void aVoid) {
       super.onPostExecute(aVoid);
       if (mItems.isEmpty()) {
-        Toast.makeText(getContext(), "Try other approach.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Try some other approach.", Toast.LENGTH_SHORT).show();
         secondaryParser();
       } else {
         initializeAdapter();
